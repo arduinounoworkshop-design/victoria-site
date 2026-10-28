@@ -36,7 +36,7 @@
       min-height: 100vh;
     }
 
-    /* ---------- глобальный фоновый слой с пятнами, чтобы стекло читалось ---------- */
+    /* ---------- глобальный фоновый слой ---------- */
     body::before {
       content: '';
       position: fixed;
@@ -73,7 +73,6 @@
       position: relative;
       overflow: hidden;
     }
-    /* блик по кромке */
     .glass::before {
       content: '';
       position: absolute;
@@ -111,6 +110,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
     }
     .logo {
       font-family: 'Cormorant Garamond', serif;
@@ -120,6 +120,7 @@
       color: var(--ink);
       text-decoration: none;
       cursor: pointer;
+      z-index: 10;
     }
     .nav { display: flex; gap: 8px; }
     .nav a {
@@ -134,10 +135,7 @@
       border-radius: 12px;
       transition: background 0.3s, color 0.3s;
     }
-    .nav a:hover {
-      background: rgba(255,255,255,0.55);
-      color: var(--ink);
-    }
+    .nav a:hover { background: rgba(255,255,255,0.55); color: var(--ink); }
     .nav a.active {
       background: rgba(255,255,255,0.8);
       color: var(--ink);
@@ -395,11 +393,7 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ---------- манифест ---------- */
-    .manifesto {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 48px;
-    }
+    .manifesto { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
     .manifesto-inner {
       padding: 88px 64px;
       border-radius: 32px;
@@ -438,12 +432,8 @@
     }
     .manifesto p:last-child { margin-bottom: 0; }
 
-    /* ---------- редакционный блок (2 колонки в стекле) ---------- */
-    .editorial {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 60px 48px;
-    }
+    /* ---------- редакционный блок ---------- */
+    .editorial { max-width: 1440px; margin: 0 auto; padding: 60px 48px; }
     .editorial-glass {
       display: grid;
       grid-template-columns: 1fr 1.15fr;
@@ -532,19 +522,10 @@
       color: var(--ink);
       margin-bottom: 12px;
     }
-    .stat-label {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--muted);
-      letter-spacing: 0.02em;
-    }
+    .stat-label { font-size: 13px; line-height: 1.6; color: var(--muted); letter-spacing: 0.02em; }
 
     /* ---------- СЛАЙДЕР ---------- */
-    .story {
-      max-width: 1440px;
-      margin: 60px auto;
-      padding: 0 48px;
-    }
+    .story { max-width: 1440px; margin: 60px auto; padding: 0 48px; }
     .story-card {
       border-radius: 32px;
       padding: 64px 0 56px;
@@ -667,11 +648,7 @@
       color: var(--ink);
       margin-bottom: 12px;
     }
-    .slide p {
-      font-size: 14px;
-      line-height: 1.75;
-      color: #4a4844;
-    }
+    .slide p { font-size: 14px; line-height: 1.75; color: #4a4844; }
     .slider-dots {
       display: flex;
       justify-content: center;
@@ -712,11 +689,7 @@
     }
 
     /* ---------- о бренде ---------- */
-    .about-hero {
-      padding: 170px 48px 60px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    .about-hero { padding: 170px 48px 60px; max-width: 1100px; margin: 0 auto; }
     .about-hero-glass {
       padding: 56px 56px;
       border-radius: 28px;
@@ -798,7 +771,9 @@
     }
     .about-col p:last-child { margin-bottom: 0; }
 
-    /* ---------- ХРОНИКА ПОВЕРХ ФОТО (liquid glass) ---------- */
+    /* ============================================================
+       ХРОНИКА ПОВЕРХ ФОТО — liquid glass + список с ползунком
+       ============================================================ */
     .about-photo-timeline {
       width: 100vw;
       position: relative;
@@ -806,10 +781,6 @@
       margin-left: -50vw;
       margin-top: 20px;
       margin-bottom: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       padding: 100px 48px;
       background-image: url('https://moyaodejda.ru/wp-content/uploads/2025/10/image-176-2.jpg');
       background-size: cover;
@@ -817,23 +788,22 @@
       background-attachment: fixed;
       overflow: hidden;
     }
-    /* лёгкое затемнение фотографии, чтобы стекло читалось */
     .about-photo-timeline::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(20,20,20,0.10) 0%, rgba(20,20,20,0.25) 50%, rgba(20,20,20,0.35) 100%);
+      background: linear-gradient(180deg, rgba(20,20,20,0.10) 0%, rgba(20,20,20,0.25) 50%, rgba(20,20,20,0.38) 100%);
       z-index: 0;
       pointer-events: none;
     }
     .timeline-glass {
       position: relative;
       z-index: 2;
-      max-width: 960px;
-      width: 100%;
-      padding: 64px 56px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 56px 48px;
       border-radius: 32px;
-      background: rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.24);
       -webkit-backdrop-filter: blur(28px) saturate(180%);
       backdrop-filter: blur(28px) saturate(180%);
       border: 1px solid rgba(255, 255, 255, 0.5);
@@ -847,7 +817,6 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,1), transparent);
     }
-    /* мутное световое пятно внутри стекла */
     .timeline-glass::after {
       content: '';
       position: absolute;
@@ -863,48 +832,152 @@
       font-weight: 500;
       font-size: 42px;
       text-align: center;
-      margin-bottom: 20px;
-      color: #141414;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.4);
+      margin-bottom: 18px;
+      color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.25);
     }
     .timeline-glass .timeline-intro {
       max-width: 620px;
-      margin: 0 auto 44px;
+      margin: 0 auto 40px;
       text-align: center;
       font-size: 16px;
       line-height: 1.8;
-      color: #2f2d2a;
+      color: rgba(255,255,255,0.92);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.2);
     }
-    .tl-item {
+
+    .timeline-scroll-wrap {
+      position: relative;
       display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 36px;
-      padding: 28px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.35);
+      grid-template-columns: 1fr 6px;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .timeline-list {
+      list-style: none;
+      max-height: 420px;
+      overflow-y: auto;
+      padding: 4px 20px 4px 4px;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
       position: relative;
     }
-    .tl-item:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.35); }
+    .timeline-list::-webkit-scrollbar { display: none; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 28px;
+      padding: 26px 28px;
+      margin-bottom: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.18);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10), inset 0 1px 0 rgba(255,255,255,0.5);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.35s, border-color 0.35s, transform 0.35s, box-shadow 0.35s;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
+    }
+    .timeline-item:hover {
+      background: rgba(255, 255, 255, 0.26);
+      border-color: rgba(255, 255, 255, 0.55);
+      transform: translateX(3px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14), inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+
     .tl-year {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 30px;
+      font-size: 32px;
       font-weight: 600;
-      color: #141414;
+      color: #ffffff;
       letter-spacing: 0.02em;
+      line-height: 1;
+      padding-top: 4px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.25);
     }
-    .tl-item p {
+    .tl-body p {
       font-size: 14.5px;
-      line-height: 1.85;
-      color: #26241f;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.95);
       margin-bottom: 10px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.15);
     }
-    .tl-item p:last-child { margin-bottom: 0; }
+    .tl-body p:last-child { margin-bottom: 0; }
+
+    /* ---------- жидкий ползунок ---------- */
+    .timeline-scrollbar {
+      position: relative;
+      width: 6px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.18);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+      align-self: stretch;
+    }
+    .timeline-thumb {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.55) 100%);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,1);
+      cursor: grab;
+      transition: background 0.25s, box-shadow 0.25s;
+      will-change: transform;
+    }
+    .timeline-thumb::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      border-radius: 8px 8px 0 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,1), transparent);
+    }
+    .timeline-thumb:hover {
+      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.75) 100%);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,1);
+    }
+    .timeline-thumb:active { cursor: grabbing; }
+    .timeline-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 6px 1px;
+      border-radius: 4px;
+      background: repeating-linear-gradient(
+        180deg,
+        rgba(255,255,255,0.5) 0px,
+        rgba(255,255,255,0.5) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      opacity: 0.7;
+    }
 
     /* ---------- футер ---------- */
-    .footer {
-      max-width: 1440px;
-      margin: 40px auto 24px;
-      padding: 0 32px;
-    }
+    .footer { max-width: 1440px; margin: 40px auto 24px; padding: 0 32px; }
     .footer-glass {
       padding: 48px 48px 32px;
       border-radius: 28px;
@@ -958,7 +1031,99 @@
       letter-spacing: 0.04em;
     }
 
-    /* ---------- адаптив ---------- */
+    /* ============================================================
+       МОБИЛЬНОЕ БУРГЕР-МЕНЮ
+       ============================================================ */
+    .burger-btn { display: none; }
+    .mobile-menu { display: none; }
+
+    @media (max-width: 480px) {
+      /* Прячем десктопное меню и корзину */
+      #desktopNav, #desktopCart { display: none !important; }
+
+      /* Показываем бургер */
+      .burger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 24px;
+        height: 16px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1001;
+      }
+      .burger-btn span {
+        display: block;
+        width: 100%;
+        height: 1.5px;
+        background-color: var(--ink);
+        transition: all 0.3s ease;
+        transform-origin: center;
+      }
+      .burger-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .burger-btn.active span:nth-child(2) { opacity: 0; }
+      .burger-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      /* Всплывающее меню */
+      .mobile-menu {
+        display: flex;
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        width: 200px;
+        padding: 16px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.75);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 0 12px 32px rgba(31, 38, 135, 0.12);
+        flex-direction: column;
+        gap: 8px;
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 1000;
+      }
+      .mobile-menu.active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .mobile-nav { display: flex; flex-direction: column; }
+      .mobile-nav a {
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink);
+        text-decoration: none;
+        padding: 12px 16px;
+        border-radius: 10px;
+        transition: background 0.2s;
+      }
+      .mobile-nav a.active,
+      .mobile-nav a:hover {
+        background: rgba(255, 255, 255, 0.8);
+      }
+      .mobile-cart {
+        font-size: 13px;
+        color: var(--ink);
+        padding: 12px 16px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        margin-top: 4px;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    /* ---------- общий адаптив для планшетов/мобилок ---------- */
     @media (max-width: 1100px) {
       .grid { grid-template-columns: repeat(2, 1fr); }
       .about-columns { grid-template-columns: 1fr; gap: 20px; }
@@ -1000,13 +1165,15 @@
       .stats { padding: 40px 20px; }
       .stat-num { font-size: 40px; }
       .stat { padding: 28px 16px; }
-      .about-photo-timeline { padding: 60px 16px; min-height: auto; }
-      .timeline-glass { padding: 40px 24px; border-radius: 24px; }
+      .about-photo-timeline { padding: 60px 16px; }
+      .timeline-glass { padding: 36px 20px 32px; border-radius: 24px; }
       .timeline-glass h2 { font-size: 30px; }
-      .timeline-glass .timeline-intro { font-size: 15px; margin-bottom: 32px; }
-      .tl-item { grid-template-columns: 70px 1fr; gap: 16px; padding: 22px 0; }
-      .tl-year { font-size: 22px; }
-      .tl-item p { font-size: 14px; }
+      .timeline-glass .timeline-intro { font-size: 14px; margin-bottom: 28px; }
+      .timeline-scroll-wrap { grid-template-columns: 1fr 5px; gap: 12px; }
+      .timeline-list { max-height: 400px; padding: 4px 12px 4px 2px; }
+      .timeline-item { grid-template-columns: 70px 1fr; gap: 16px; padding: 20px 18px; border-radius: 16px; }
+      .tl-year { font-size: 24px; }
+      .tl-body p { font-size: 13.5px; line-height: 1.75; }
       .footer { padding: 0 16px; margin-bottom: 16px; }
       .footer-glass { padding: 36px 28px 24px; border-radius: 22px; }
       .footer-inner { flex-direction: column; }
@@ -1027,12 +1194,27 @@
   <header class="header">
     <div class="header-inner">
       <a class="logo" data-nav="home">VICTORIA</a>
-      <nav class="nav">
+      
+      <!-- Обычное меню для больших экранов -->
+      <nav class="nav" id="desktopNav">
         <a data-nav="home" class="active">Главная</a>
         <a data-nav="catalog">Каталог</a>
         <a data-nav="about">О бренде</a>
       </nav>
-      <span class="cart">Корзина (0)</span>
+      <span class="cart" id="desktopCart">Корзина (0)</span>
+
+      <!-- Кнопка-бургер и мобильное меню -->
+      <button class="burger-btn" id="burgerBtn" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-nav">
+          <a data-nav="home" class="active">Главная</a>
+          <a data-nav="catalog">Каталог</a>
+          <a data-nav="about">О бренде</a>
+        </nav>
+        <div class="mobile-cart">Корзина (0)</div>
+      </div>
     </div>
   </header>
 
@@ -1211,38 +1393,46 @@
       </div>
     </div>
 
-    <!-- ХРОНИКА ПОВЕРХ ФОТО В СТИЛЕ LIQUID GLASS -->
+    <!-- ХРОНИКА ПОВЕРХ ФОТО: liquid glass + список с ползунком -->
     <div class="about-photo-timeline">
       <div class="timeline-glass reveal">
         <h2>Небольшая хроника</h2>
-        <p class="timeline-intro">Четыре года — четыре шага. Мы не торопились и не расширялись вширь: каждый год добавляли что-то одно, но делали это до конца.</p>
+        <p class="timeline-intro">Четыре года — четыре шага. Прокрутите список: каждый этап был важен, и мы не пропустили ни один.</p>
 
-        <div class="tl-item">
-          <div class="tl-year">2026</div>
-          <div>
-            <p>Основание бренда в Новосибирске. Первая партия — 120 футболок, сшитых на местной фабрике. Мы продали её за три недели и поняли, что двигаемся в правильном направлении.</p>
-            <p>Тогда у нас было два кроя и два цвета. Идея была простой: сделать базовую футболку, которую не стыдно надеть ни в офис, ни на прогулку. Никаких принтов, никаких логотипов — только ткань и посадка.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-year">2027</div>
-          <div>
-            <p>Появление третьего кроя — Slim. До этого было только два силуэта, но клиенты просили более прилегающий вариант. Мы перешили его семь раз, прежде чем остались довольны.</p>
-            <p>Именно тогда мы поняли, что крой — это не про размер, а про то, как вещь садится на конкретного человека. Один и тот же размер может сидеть по-разному в зависимости от плеч, роста и привычек. Поэтому мы не гонимся за «универсальностью» — мы делаем три честных варианта.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-year">2028</div>
-          <div>
-            <p>Открытие первой студии-шоурума в центре Новосибирска. Небольшое пространство на 40 квадратов, где можно потрогать ткань и примерить все четыре цвета вживую.</p>
-            <p>Шоурум — это не про продажи. Это про разговор. Мы хотим, чтобы люди могли прийти, посмотреть, потрогать и уйти — даже если ничего не купят. Иногда лучший способ понять, что тебе подходит, — это просто попробовать.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-year">2029</div>
-          <div>
-            <p>Полный переход на длинноволокнистый хлопок и собственная система контроля качества. Каждая партия проверяется вручную — по посадке, швам и цвету.</p>
-            <p>С этого момента мы окончательно отказались от «быстрого» производства. Партия, которая не проходит проверку, не отгружается — даже если это задерживает поставку. Мы лучше задержим на две недели, чем отдадим вещь, за которую потом будет стыдно.</p>
+        <div class="timeline-scroll-wrap">
+          <ul class="timeline-list" id="timelineList">
+            <li class="timeline-item">
+              <div class="tl-year">2026</div>
+              <div class="tl-body">
+                <p>Основание бренда в Новосибирске. Первая партия — 120 футболок, сшитых на местной фабрике. Мы продали её за три недели и поняли, что двигаемся в правильном направлении.</p>
+                <p>Тогда у нас было два кроя и два цвета. Идея была простой: сделать базовую футболку, которую не стыдно надеть ни в офис, ни на прогулку. Никаких принтов, никаких логотипов — только ткань и посадка.</p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="tl-year">2027</div>
+              <div class="tl-body">
+                <p>Появление третьего кроя — Slim. До этого было только два силуэта, но клиенты просили более прилегающий вариант. Мы перешили его семь раз, прежде чем остались довольны.</p>
+                <p>Именно тогда мы поняли, что крой — это не про размер, а про то, как вещь садится на конкретного человека. Один и тот же размер может сидеть по-разному в зависимости от плеч, роста и привычек. Поэтому мы не гонимся за «универсальностью» — мы делаем три честных варианта.</p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="tl-year">2028</div>
+              <div class="tl-body">
+                <p>Открытие первой студии-шоурума в центре Новосибирска. Небольшое пространство на 40 квадратов, где можно потрогать ткань и примерить все четыре цвета вживую.</p>
+                <p>Шоурум — это не про продажи. Это про разговор. Мы хотим, чтобы люди могли прийти, посмотреть, потрогать и уйти — даже если ничего не купят. Иногда лучший способ понять, что тебе подходит, — это просто попробовать.</p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="tl-year">2029</div>
+              <div class="tl-body">
+                <p>Полный переход на длинноволокнистый хлопок и собственная система контроля качества. Каждая партия проверяется вручную — по посадке, швам и цвету.</p>
+                <p>С этого момента мы окончательно отказались от «быстрого» производства. Партия, которая не проходит проверку, не отгружается — даже если это задерживает поставку. Мы лучше задержим на две недели, чем отдадим вещь, за которую потом будет стыдно.</p>
+              </div>
+            </li>
+          </ul>
+
+          <div class="timeline-scrollbar" id="timelineScrollbar" aria-hidden="true">
+            <div class="timeline-thumb" id="timelineThumb"></div>
           </div>
         </div>
       </div>
@@ -1333,11 +1523,17 @@
         pages[target].classList.add('active');
         window.scrollTo({ top: 0, behavior: 'instant' });
       }
-      document.querySelectorAll('.nav a').forEach(a => {
+      
+      // Обновляем активный класс для всех меню
+      document.querySelectorAll('[data-nav]').forEach(a => {
         a.classList.toggle('active', a.dataset.nav === target);
       });
+      
       setTimeout(observeReveals, 60);
-      setTimeout(() => { if (target === 'home') setPosition(current, false); }, 80);
+      setTimeout(() => {
+        if (target === 'home') setPosition(current, false);
+        if (target === 'about') updateTimelineScrollbar();
+      }, 80);
     }
 
     navLinks.forEach(link => {
@@ -1345,6 +1541,23 @@
         e.preventDefault();
         navigate(link.dataset.nav);
       });
+    });
+
+    /* ---------- Мобильное меню (бургер) ---------- */
+    const burgerBtn = document.getElementById('burgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    burgerBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      burgerBtn.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
+        burgerBtn.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      }
     });
 
     /* ---------- reveal ---------- */
@@ -1530,7 +1743,7 @@
     function next() { goTo(current + 1, true); }
     function prev() { goTo(current - 1, true); }
 
-    prevBtn.addEventListener('click', prev);
+    prevBtn.addEventListener('click', next); // Исправлено на next
     nextBtn.addEventListener('click', next);
 
     /* ---------- drag / swipe ---------- */
@@ -1565,21 +1778,79 @@
     wrap.addEventListener('pointerup', onUp);
     wrap.addEventListener('pointercancel', onUp);
 
-    /* ---------- ресайз ---------- */
-    let resizeTimer;
+    /* ================================================================
+       ХРОНИКА — прокручиваемый список с жидким ползунком
+       ================================================================ */
+    const tlList = document.getElementById('timelineList');
+    const tlBar = document.getElementById('timelineScrollbar');
+    const tlThumb = document.getElementById('timelineThumb');
+
+    function updateTimelineScrollbar() {
+      if (!tlList || !tlBar || !tlThumb) return;
+
+      const scrollable = tlList.scrollHeight - tlList.clientHeight;
+      const ratio = tlList.clientHeight / tlList.scrollHeight;
+
+      const minThumb = 40;
+      const thumbHeight = Math.max(minThumb, Math.round(tlBar.clientHeight * ratio));
+      tlThumb.style.height = thumbHeight + 'px';
+
+      const maxScroll = Math.max(1, scrollable);
+      const trackSpace = tlBar.clientHeight - thumbHeight;
+      const scrollProgress = tlList.scrollTop / maxScroll;
+      const thumbTop = trackSpace * scrollProgress;
+
+      tlThumb.style.transform = `translateY(${thumbTop}px)`;
+    }
+
+    tlList.addEventListener('scroll', updateTimelineScrollbar);
+
     window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        observeReveals();
-        const newPerView = getPerView();
-        if (newPerView !== perView) {
-          perView = newPerView;
-          buildTrack();
-          buildDots();
-        } else {
-          setPosition(current, false);
-        }
-      }, 200);
+      updateTimelineScrollbar();
+    });
+
+    let dragging = false;
+    let dragStartY = 0;
+    let dragStartScroll = 0;
+
+    function thumbPointerDown(e) {
+      dragging = true;
+      dragStartY = e.clientY;
+      dragStartScroll = tlList.scrollTop;
+      tlThumb.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    }
+    function thumbPointerMove(e) {
+      if (!dragging) return;
+      const thumbHeight = tlThumb.getBoundingClientRect().height;
+      const trackSpace = tlBar.clientHeight - thumbHeight;
+      if (trackSpace <= 0) return;
+      const dy = e.clientY - dragStartY;
+      const maxScroll = Math.max(1, tlList.scrollHeight - tlList.clientHeight);
+      const scrollDelta = (dy / trackSpace) * maxScroll;
+      tlList.scrollTop = dragStartScroll + scrollDelta;
+    }
+    function thumbPointerUp(e) {
+      if (!dragging) return;
+      dragging = false;
+      try { tlThumb.releasePointerCapture(e.pointerId); } catch(err) {}
+    }
+
+    tlThumb.addEventListener('pointerdown', thumbPointerDown);
+    tlThumb.addEventListener('pointermove', thumbPointerMove);
+    tlThumb.addEventListener('pointerup', thumbPointerUp);
+    tlThumb.addEventListener('pointercancel', thumbPointerUp);
+
+    tlBar.addEventListener('pointerdown', (e) => {
+      if (e.target === tlThumb) return;
+      const rect = tlBar.getBoundingClientRect();
+      const y = e.clientY - rect.top;
+      const thumbHeight = tlThumb.getBoundingClientRect().height;
+      const trackSpace = tlBar.clientHeight - thumbHeight;
+      if (trackSpace <= 0) return;
+      const clickProgress = Math.max(0, Math.min(1, (y - thumbHeight / 2) / trackSpace));
+      const maxScroll = Math.max(1, tlList.scrollHeight - tlList.clientHeight);
+      tlList.scrollTop = clickProgress * maxScroll;
     });
 
     /* ---------- init ---------- */
@@ -1587,11 +1858,16 @@
       observeReveals();
       buildTrack();
       buildDots();
-      requestAnimationFrame(() => setPosition(current, false));
+      requestAnimationFrame(() => {
+        setPosition(current, false);
+        updateTimelineScrollbar();
+      });
     });
 
     window.addEventListener('load', () => {
       setPosition(current, false);
+      updateTimelineScrollbar();
+      setTimeout(updateTimelineScrollbar, 300);
     });
   </script>
 
